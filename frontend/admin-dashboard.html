@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Prediction & Redistribution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Matter.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Waste<span>AI</span></h2>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="admin-dashboard.html" class="active">Admin Dashboard</a>
+                <a href="feedback.html">View Feedback</a>
+                <a href="support.html">Help & Support</a>
+                <a href="index.html" class="logout-link">Logout</a>
+            </nav>
+            
+            <div class="add-food-card" style="margin-top: 2rem;">
+                <h3>Add New Item</h3>
+                <form id="foodForm">
+                    <div class="form-group">
+                        <label for="name">Food Name</label>
+                        <input type="text" id="name" required placeholder="e.g. Tomatoes" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity (kg/units)</label>
+                        <input type="number" id="quantity" required placeholder="e.g. 5" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="days">Storage Days</label>
+                        <input type="number" id="days" required placeholder="Days in storage" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="storage">Storage Type</label>
+                        <select id="storage" required>
+                            <option value="Room">Room Temp</option>
+                            <option value="Fridge">Fridge</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Analyze & Add</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <header>
+                <h1>Dashboard overview</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p class="label">Total Items</p>
+                        <h2 id="totalItems">0</h2>
+                    </div>
+                    <div class="stat-card warning-stat">
+                        <p class="label">Expiring Soon</p>
+                        <h2 id="expiringItems">0</h2>
+                    </div>
+                    <div class="stat-card success-stat">
+                        <p class="label">Donated</p>
+                        <h2 id="donatedItems">0</h2>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-split">
+                <!-- Food List -->
+                <section class="food-list-container glass-panel">
+                    <h3>Inventory Tracking</h3>
+                    <div class="table-responsive">
+                        <table id="foodTable">
+                            <thead>
+                                <tr>
+                                    <th>Food Item</th>
+                                    <th>Qty</th>
+                                    <th>Days</th>
+                                    <th>Storage</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="foodTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- AntiGravity Donation Zone (Matter.js) -->
+                <section class="physics-zone-container glass-panel">
+                    <h3>Donation Zone 🎁</h3>
+                    <p class="hint">Drag expiring items into the donation bin to redistribute them!</p>
+                    <div id="physics-canvas" class="physics-canvas-wrapper">
+                        <!-- Canvas will be injected here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script>const IS_ADMIN = true;</script>
+    <script src="app.js"></script>
+</body>
+</html>

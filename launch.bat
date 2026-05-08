@@ -1,0 +1,16 @@
+@echo off
+echo Starting ML API...
+start "ML API" cmd /k "cd ml_api && venv\Scripts\activate.bat && python app.py"
+
+echo Starting Admin Dashboard (Streamlit)...
+start "Admin Dashboard" cmd /k "cd admin_app && pip install -r requirements.txt && python -m streamlit run app.py"
+
+echo Starting Backend API and Frontend...
+start "Backend API and Frontend" cmd /k "cd backend && npm start"
+
+echo Waiting for services to start...
+timeout /t 5 /nobreak
+
+echo Opening application in Chrome...
+start chrome http://localhost:5000
+start chrome http://localhost:8501

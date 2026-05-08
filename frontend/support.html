@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteAI - Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Waste<span>AI</span></h2>
+            </div>
+            
+            <nav class="nav-menu" id="supportNav">
+                <a href="index.html" class="active">Back to Portal</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <header>
+                <h1>Help & Support</h1>
+                <p class="subtitle">Frequently Asked Questions & Guides</p>
+            </header>
+
+            <div class="content-split" style="grid-template-columns: 1fr;">
+                <section class="glass-panel">
+                    <h3>Frequently Asked Questions</h3>
+                    <div style="margin-top: 1rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem;">How does the predictive AI work?</h4>
+                            <p style="color: var(--text-muted); line-height: 1.6;">Our Machine Learning model (Random Forest) was trained on dataset patterns analyzing Storage Duration, Quantity, and Storage Facility Type (Fridge vs Room Temp). It determines if food is Fresh, Expiring, or Waste instantly.</p>
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem;">How do I donate food?</h4>
+                            <p style="color: var(--text-muted); line-height: 1.6;">If you are an <strong>Admin</strong>, you have access to the "Donation Zone" on your dashboard. When food shows up as 'Expiring', physical boxes drop out of the sky. Just click and drag them into the Donation Bin!</p>
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem;">What is the difference between Admin and User?</h4>
+                            <p style="color: var(--text-muted); line-height: 1.6;">Users are generally restaurants, supermarkets, or individuals adding inventory. Admins represent the logistics managers coordinating pickups, viewing global statistics, and confirming donations.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const role = localStorage.getItem('role') || 'user'; 
+        const nav = document.getElementById('supportNav');
+        if (role === 'admin') {
+            nav.innerHTML = `
+                <a href="admin-dashboard.html">Admin Dashboard</a>
+                <a href="feedback.html">View Feedback</a>
+                <a href="support.html" class="active">Help & Support</a>
+                <a href="index.html" class="logout-link">Logout</a>
+            `;
+        } else {
+            nav.innerHTML = `
+                <a href="user-dashboard.html">Dashboard</a>
+                <a href="feedback.html">Give Feedback</a>
+                <a href="support.html" class="active">Help & Support</a>
+                <a href="index.html" class="logout-link">Logout</a>
+            `;
+        }
+    </script>
+</body>
+</html>

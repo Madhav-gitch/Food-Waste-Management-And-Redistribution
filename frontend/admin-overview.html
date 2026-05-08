@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodRescue AI - Admin Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🍃</div>
+                <h2>FoodRescue <span>AI</span></h2>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="admin-overview.html" class="active">
+                    <span>🎛️</span> Admin Overview
+                </a>
+                <a href="restaurant-portal.html">
+                    <span>🍴</span> Restaurant Portal
+                </a>
+                <a href="ngo-dashboard.html">
+                    <span>🏢</span> NGO Dashboard
+                </a>
+            </nav>
+
+            <div class="user-profile">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <h4 id="profileName">Demo User</h4>
+                    <p id="profileRole">Admin Mode</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <div class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <div class="auth-buttons">
+                    <button class="outline-btn" style="border:none; font-size:1.2rem;">🔔</button>
+                    <button class="outline-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-grid">
+                <div class="stat-card" style="border-top:3px solid var(--primary);">
+                    <p class="label" style="display:flex; justify-content:space-between;">Total Food Saved <span>🍴</span></p>
+                    <h2><span id="statFood">0</span> <span style="font-size:0.9rem; font-weight:400; color:var(--text-muted);">kg</span></h2>
+                    <p style="color:var(--success); font-size:0.8rem; font-weight:600; margin-top:0.5rem;">Global Donated</p>
+                </div>
+                <div class="stat-card" style="border-top:3px solid #3b82f6;">
+                    <p class="label" style="display:flex; justify-content:space-between;">Meals Provided <span>🍽️</span></p>
+                    <h2 id="statMeals">0</h2>
+                    <p style="color:#0ea5e9; font-size:0.8rem; font-weight:600; margin-top:0.5rem;">Estimated</p>
+                </div>
+                <div class="stat-card" style="border-top:3px solid var(--success);">
+                    <p class="label" style="display:flex; justify-content:space-between;">CO2 Reduced <span>💨</span></p>
+                    <h2><span id="statCO2">0</span> <span style="font-size:0.9rem; font-weight:400; color:var(--text-muted);">tons</span></h2>
+                    <p style="color:var(--success); font-size:0.8rem; font-weight:600; margin-top:0.5rem;">Impact</p>
+                </div>
+                <div class="stat-card" style="border-top:3px solid var(--accent-purple);">
+                    <p class="label" style="display:flex; justify-content:space-between;">Active Partners <span>🤝</span></p>
+                    <h2 id="statPartners">0</h2>
+                    <p id="statPartnerDetails" style="color:var(--text-muted); font-size:0.8rem; margin-top:0.5rem;">0 Restaurants, 0 NGOs</p>
+                </div>
+            </div>
+
+            <!-- Live Map Placeholder -->
+            <div class="glass-panel">
+                <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+                    <h3>Live Waste Hotspots & Routes</h3>
+                    <div style="display:flex; gap:1rem; font-size:0.8rem;">
+                        <span style="display:flex; align-items:center; gap:0.3rem;"><div style="width:8px; height:8px; border-radius:50%; background:var(--danger);"></div> High Volume</span>
+                        <span style="display:flex; align-items:center; gap:0.3rem;"><div style="width:8px; height:8px; border-radius:50%; background:var(--success);"></div> Active Route</span>
+                    </div>
+                </div>
+                <div style="width:100%; height:300px; background:#f1f5f9; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--text-muted);">
+                    [ Map Visualization Placeholder ]
+                </div>
+            </div>
+
+            <!-- Recent Matches -->
+            <div class="glass-panel">
+                <h3>Recent Matches</h3>
+                <div id="adminRecentMatches">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- AI Config -->
+            <div class="glass-panel">
+                <div style="display:flex; justify-content:space-between;">
+                    <h3>AI Matching Configuration</h3>
+                    <span>⚙️</span>
+                </div>
+                
+                <div style="display:flex; gap:1.5rem; margin-top:1rem;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Min Quantity (kg)</label>
+                        <input type="number" value="5">
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem;">Minimum food required to trigger a match.</p>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Max Distance (km)</label>
+                        <input type="number" value="15">
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem;">Maximum radius for NGO matching.</p>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Urgency Threshold (hrs)</label>
+                        <input type="number" value="2">
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem;">Time before expiry to mark as High Urgency.</p>
+                    </div>
+                </div>
+                <div style="text-align:right; margin-top:1rem;">
+                    <button class="btn primary-btn" onclick="alert('Configuration saved')">Save Configuration</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

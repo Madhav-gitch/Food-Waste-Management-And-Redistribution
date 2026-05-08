@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodRescue AI - NGO Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🍃</div>
+                <h2>FoodRescue <span>AI</span></h2>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="active" onclick="switchTab('home', this)">
+                    Home
+                </a>
+                <a href="#" onclick="switchTab('requestFood', this)">
+                    Request Food
+                </a>
+                <a href="#" onclick="switchTab('available', this)">
+                    Available Food
+                </a>
+                <a href="#" onclick="switchTab('orders', this)">
+                    Incoming Deliveries
+                </a>
+                <a href="#" onclick="switchTab('history', this)">
+                    Request History
+                </a>
+                <a href="#" onclick="switchTab('settings', this)">
+                    Settings
+                </a>
+                <a href="#" onclick="switchTab('help', this)">
+                    AI Assistant
+                </a>
+                <a href="#" onclick="logout()" style="margin-top:auto;">
+                    Logout
+                </a>
+            </nav>
+
+            <div class="user-profile">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <h4 id="profileName">Demo User</h4>
+                    <p id="profileRole">Ngo Mode</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <div class="dashboard-header">
+                <h1 id="pageTitle">Home</h1>
+                <div class="auth-buttons">
+                    <button class="outline-btn" style="border:none; font-size:1.2rem;">🔔</button>
+                </div>
+            </div>
+
+            <!-- TAB: HOME -->
+            <section id="tab-home" class="tab-content active" style="display:block;">
+                <div class="glass-panel" style="display:flex; justify-content:space-between; margin-bottom:1.5rem;">
+                    <div>
+                        <h3 style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.2rem;">
+                            <span style="background:rgba(16,185,129,0.1); color:#10b981; padding:0.4rem; border-radius:8px;">🏢</span> 
+                            <span id="ngoNameUi">Downtown Shelter</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Live Auto-Assignment AI Notice -->
+                <div class="prediction-banner" style="margin-bottom:1.5rem;">
+                    <div class="prediction-content">
+                        <h3 style="display:flex; align-items:center; gap:0.5rem; font-weight:600;"><span style="font-size:1.2rem;">✨</span> Auto-Assign AI Active</h3>
+                        <p>Our smart engine is actively routing surplus food directly to you based on your location and capacity.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 1.5rem;">
+                        <div>
+                            <h3 style="margin-bottom:0.2rem; display:flex; align-items:center; gap:0.5rem;">
+                                <span style="background:#e0f2fe; color:#0ea5e9; padding:0.4rem; border-radius:8px;">📦</span> Daily Storage Capacity
+                            </h3>
+                            <p style="color:var(--text-muted); font-size:0.85rem;">Live tracking based on today's incoming load</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:2rem;">
+                        <div style="flex:1;">
+                            <div class="progress-header">
+                                <span style="font-weight:600;">COLD STORAGE (Today)</span>
+                                <span><strong id="coldStorageUsage">0</strong>/100 kg</span>
+                            </div>
+                            <div class="progress-bar"><div id="coldStorageBar" class="progress-fill" style="width:0%; background:#3b82f6;"></div></div>
+                        </div>
+                        <div style="flex:1;">
+                            <div class="progress-header">
+                                <span style="font-weight:600;">DRY GOODS (Today)</span>
+                                <span><strong id="dryStorageUsage">0</strong>/500 kg</span>
+                            </div>
+                            <div class="progress-bar"><div id="dryStorageBar" class="progress-fill" style="width:0%; background:#f59e0b;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: REQUEST FOOD -->
+            <section id="tab-requestFood" class="tab-content" style="display:none;">
+                <div class="glass-panel">
+                    <h3>Demand Driven Food Request</h3>
+                    <p style="color:var(--text-muted); margin-bottom:1.5rem;">Broadcast a targeted ping to local restaurants. AI filters matches to avoid notification spam.</p>
+                    <div class="form-group">
+                        <label>Category Needed</label>
+                        <select id="reqFoodType">
+                            <option value="Fresh Produce">Fresh Produce (Veg/Fruits)</option>
+                            <option value="Bread & Bakery">Bread & Bakery</option>
+                            <option value="Cooked Meals">Cooked Meals / Proteins</option>
+                            <option value="Dry Goods">Dry / Packaged Goods</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity Required</label>
+                        <div style="display:flex; gap:0.5rem;">
+                            <input type="number" id="reqQty" placeholder="50" style="flex:1;">
+                            <select id="reqUnit" style="width:100px;">
+                                <option value="kg">kg</option>
+                                <option value="items">items</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Urgency Level</label>
+                        <select id="reqUrgency">
+                            <option value="Normal">Normal (Next 24h)</option>
+                            <option value="High">High (Next 4h)</option>
+                            <option value="Critical">Critical (Immediate Need)</option>
+                        </select>
+                    </div>
+                    <button class="btn bg-green" onclick="submitNgoRequest()" style="width:100%;">Broadcast AI Request</button>
+                    <div id="reqResponse" style="margin-top:1rem; text-align:center;"></div>
+                </div>
+            </section>
+
+            <!-- TAB: ORDERS (Incoming) -->
+            <section id="tab-orders" class="tab-content" style="display:none;">
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3 style="margin:0; margin-bottom:1rem;">Active Deliveries (En Route)</h3>
+                    <div id="incomingDeliveriesList"></div>
+                </div>
+            </section>
+
+            <!-- TAB: HISTORY (Received today & Past Requests) -->
+            <section id="tab-history" class="tab-content" style="display:none;">
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3 style="margin:0; margin-bottom:1rem;">Today's Received Items</h3>
+                    <div id="dailyCollectionHistoryList"></div>
+                </div>
+                <div class="glass-panel">
+                    <h3 style="margin:0; margin-bottom:1rem;">Your Request Broadcast History</h3>
+                    <div id="ngoRequestHistoryList"></div>
+                </div>
+            </section>
+
+            <!-- TAB: AVAILABLE -->
+            <section id="tab-available" class="tab-content" style="display:none;">
+                <div class="glass-panel">
+                    <h3 style="margin-bottom:0.2rem;">Available Matches (Manual Override)</h3>
+                    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.5rem;">Un-matched global items appear here. Auto-assignment generally handles this.</p>
+                    <div id="availableMatchesList"></div>
+                </div>
+            </section>
+
+            <!-- TAB: SETTINGS -->
+            <section id="tab-settings" class="tab-content" style="display:none;">
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3>Profile & Contact</h3>
+                    <div class="form-group"><label>Organization Name</label><input type="text" id="setOrg" disabled></div>
+                    <div class="form-group"><label>Contact Details</label><input type="text" id="setContact" disabled></div>
+                    <div class="form-group"><label>Address (Location map integration active)</label><input type="text" id="setLoc" disabled></div>
+                </div>
+
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3>Notifications</h3>
+                    <div style="display:flex; flex-direction:column; gap:0.8rem; margin-bottom:1rem;">
+                        <label><input type="checkbox" checked> Pickup Alerts</label>
+                        <label><input type="checkbox" checked> Request Updates</label>
+                        <label><input type="checkbox" checked> Delivery Status</label>
+                        <label><input type="checkbox"> Emergency Requests Toggle</label>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3>Preferences (NGO)</h3>
+                    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Food Types Preferred</label>
+                            <input type="text" value="Veg, Pkg, Dry">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Availability Time Slots</label>
+                            <input type="text" value="08:00 - 18:00">
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin-top:1.5rem;">Specific Logistics Limits</h4>
+                    <div class="form-group"><label>Max Delivery Intake Capacity per day (kg)</label><input type="number" value="600"></div>
+                    <div class="form-group">
+                        <label>Storage Capability Profile</label>
+                        <select>
+                            <option>Cold Storage & Dry Goods</option>
+                            <option>Dry Goods Only (No Fridge)</option>
+                            <option>Refrigerated First</option>
+                            <option>No Preference</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3>Security</h3>
+                    <div style="display:flex; gap:1rem;">
+                        <button class="outline-btn">Change Password</button>
+                        <button class="outline-btn" style="color:var(--primary); border-color:var(--primary);">Enable Two-Factor Authentication</button>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="margin-bottom:1.5rem;">
+                    <h3>About & Support</h3>
+                    <p style="font-size:0.9rem; color:gray; margin-bottom:0.8rem;">App Info: FoodRescue AI Logistics Platform</p>
+                    <p style="font-size:0.9rem; color:gray; margin-bottom:0.8rem;">Mission: Food waste reduction through AI intervention</p>
+                    <p style="font-size:0.9rem; color:gray; margin-bottom:1.5rem;">Version: 2.1.0 (Stable)</p>
+                    <div style="display:flex; gap:1rem;">
+                        <button class="outline-btn">FAQ</button>
+                        <button class="outline-btn">Contact Support</button>
+                        <button class="outline-btn" onclick="switchTab('help')" style="background:#f3e8ff; color:#9333ea; border-color:#d8b4fe;">AI Assistant Access</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: HELP -->
+            <section id="tab-help" class="tab-content" style="display:none;">
+                <div class="glass-panel" style="height:500px; display:flex; flex-direction:column;">
+                    <h3>🤖 AI Assistant</h3>
+                    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">Ask any questions regarding logistics, assignments, or capacities.</p>
+                    
+                    <div id="chatBox" style="flex:1; background:#f4f4f5; border-radius:8px; padding:1.5rem; overflow-y:auto; display:flex; flex-direction:column; gap:1rem; margin-bottom:1rem;">
+                        <div style="background:var(--accent-purple); color:white; padding:0.8rem; border-radius:12px 12px 12px 0; align-self:flex-start; max-width:80%;">
+                            Hello! I'm your AI Logistics Coordinator. How can I help you today?
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:0.5rem;">
+                        <input type="text" id="chatInput" placeholder="Type a message..." style="flex:1; padding:0.8rem; border-radius:8px; border:1px solid #cbd5e1;">
+                        <button class="btn bg-green" onclick="sendAiMessage()">Send</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Receipt Verification Modal -->
+    <div id="receiptModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:100; align-items:center; justify-content:center;">
+        <div class="glass-panel" style="width:400px; background:white; position:relative; text-align:center;">
+            <h3 style="margin-bottom:1rem; color:var(--text-main);">Confirm Receipt</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.5rem;">Have you physically received this item? Marking it as received will log it firmly into your daily intake.</p>
+            <div style="display:flex; gap:1rem; justify-content:center;">
+                <button class="outline-btn" onclick="closeReceiptModal()" style="color:#ef4444; border-color:#fca5a5; flex:1;">Cancel</button>
+                <button class="btn bg-green" id="confirmReceiptBtn" style="flex:1;">Yes, received</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inject Profile logic dynamically -->
+    <script src="ngo.js?v=5"></script>
+</body>
+</html>

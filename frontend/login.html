@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodRescue AI - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="landing-body">
+    <div class="auth-split-container">
+        
+        <div class="auth-visual login-visual">
+            <h1>Welcome<br><span style="font-weight: 300;">Back.</span></h1>
+            <p>Access your dashboard to manage your food inventory, monitor expiry dates, and track community donations.</p>
+        </div>
+
+        <div class="auth-form-side">
+            <a href="index.html" class="back-to-home">← Back to Home</a>
+            
+            <h2>Sign In</h2>
+            <p class="subtitle">Secure access to the FoodRescue network.</p>
+
+            <form id="loginForm">
+                <div class="floating-group">
+                    <input type="email" id="email" required placeholder=" ">
+                    <label>Email Address</label>
+                </div>
+                
+                <div class="floating-group">
+                    <input type="password" id="password" required placeholder=" ">
+                    <label>Password</label>
+                </div>
+                
+                <button type="submit" class="btn primary-btn" style="width: 100%; margin-top: 1rem; padding: 1rem; font-size: 1.1rem; border-radius: 8px;">Access Dashboard</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 3rem; font-size: 0.95rem; color: var(--text-muted);">
+                Don't have an account? <a href="register.html" class="auth-link">Register here</a>
+            </p>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast hidden"></div>
+    <script src="auth.js"></script>
+</body>
+</html>

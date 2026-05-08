@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodRescue AI - Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-split-container {
+            width: 1100px;
+            height: 750px;
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-row .floating-group {
+            flex: 1;
+        }
+        #donorCredentials {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px dashed var(--glass-border);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="landing-body">
+    <div class="auth-split-container">
+        
+        <div class="auth-visual">
+            <h1>Join the<br><span style="font-weight: 300;">Network.</span></h1>
+            <p>Become part of a global initiative to connect surplus food with communities in need. Fast, secure, and impactful.</p>
+        </div>
+
+        <div class="auth-form-side">
+            <a href="index.html" class="back-to-home">← Back to Home</a>
+            
+            <h2>Create Account</h2>
+            <p class="subtitle">Join our food redistribution network.</p>
+
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="floating-group">
+                        <input type="text" id="regName" required placeholder=" ">
+                        <label>Organization Name</label>
+                    </div>
+                    <div class="floating-group">
+                        <select id="regRole" required>
+                            <option value="Restaurant">Restaurant (Donor)</option>
+                            <option value="NGO">NGO (Receiver)</option>
+                            <option value="Admin">System Admin</option>
+                        </select>
+                        <label>Account Type</label>
+                    </div>
+                </div>
+
+                <div class="floating-group">
+                    <input type="email" id="regEmail" required placeholder=" ">
+                    <label>Email Address</label>
+                </div>
+                
+                <div class="floating-group">
+                    <input type="password" id="regPassword" required placeholder=" ">
+                    <label>Password</label>
+                </div>
+
+                <!-- Donor Specific Fields (Visible only for Restaurant) -->
+                <div id="donorCredentials">
+                    <h4 style="margin-bottom: 1rem; font-weight: 600; color:var(--text-main);">Verification Details</h4>
+                    
+                    <div class="form-row">
+                        <div class="floating-group" style="flex: 0.4;">
+                            <select id="regCountry">
+                                <option value="United States" data-code="+1">US (+1)</option>
+                                <option value="India" data-code="+91">IN (+91)</option>
+                                <option value="United Kingdom" data-code="+44">UK (+44)</option>
+                            </select>
+                            <label>Country</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="tel" id="regContact" placeholder=" ">
+                            <label>Phone Number</label>
+                        </div>
+                        <input type="hidden" id="regPhoneCode" value="+1">
+                    </div>
+
+                    <div class="floating-group" style="margin-bottom: 0.5rem;">
+                        <input type="text" id="regLocation" readonly placeholder=" " style="padding-right: 120px;">
+                        <label>Facility Location</label>
+                        <button type="button" id="detectLocBtn" class="btn outline-btn" style="position: absolute; right: 0.5rem; top: 0.5rem; padding: 0.5rem; font-size: 0.8rem; background: white;">📍 Auto-Detect</button>
+                    </div>
+                    
+                    <div id="locationMap" style="height: 120px; width: 100%; border-radius: 8px; border: 1px solid var(--glass-border); z-index:1; margin-bottom: 1.5rem;"></div>
+
+                    <div class="form-row">
+                        <div class="floating-group" style="margin-bottom:0;">
+                            <input type="text" id="regFounder" placeholder=" ">
+                            <label>Registered Founder Name</label>
+                        </div>
+                        <div class="floating-group" style="margin-bottom:0;">
+                            <input type="text" id="regCertificate" placeholder=" ">
+                            <label>Food Safety Certificate No.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn primary-btn" style="width: 100%; padding: 1rem; font-size: 1.1rem; border-radius: 8px;">Create Account</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-muted);">
+                Already have an account? <a href="login.html" class="auth-link">Sign in</a>
+            </p>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Success Modal Overlay -->
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-icon">✅</div>
+            <h3>Account Created Successfully!</h3>
+            <p>Your details have been securely stored. You can now log in to the network.</p>
+            <a href="login.html" class="btn primary-btn" style="display:inline-block; padding: 0.8rem 2rem; margin-top:1rem; text-decoration:none;">Go to Login</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

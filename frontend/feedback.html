@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteAI - Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Waste<span>AI</span></h2>
+            </div>
+            
+            <nav class="nav-menu" id="feedbackNav">
+                <a href="index.html" class="active">Back to Portal</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <header>
+                <h1>User Feedback</h1>
+                <p class="subtitle">Tell us about your experience or read global input.</p>
+            </header>
+
+            <div class="content-split">
+                <!-- User Form -->
+                <section class="glass-panel" id="userFeedbackSection" style="display: none;">
+                    <h3>Submit Your Feedback</h3>
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="feedbackName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Rating (1-5)</label>
+                            <input type="number" id="feedbackRating" min="1" max="5" required placeholder="5">
+                        </div>
+                        <div class="form-group">
+                            <label>Thoughts / Features requested</label>
+                            <textarea id="feedbackMessage" rows="5" required style="width: 100%; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(15, 23, 42, 0.5); color: white; padding: 0.8rem; font-family: Outfit; font-size: 1rem;"></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Submit Feedback</button>
+                    </form>
+                </section>
+
+                <!-- Admin View -->
+                <section class="food-list-container glass-panel" id="adminFeedbackSection" style="display: none;">
+                    <h3>Global Feedback Repository</h3>
+                    <div class="table-responsive">
+                        <table id="feedbackTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Rating</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="feedbackTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="feedback.js"></script>
+</body>
+</html>

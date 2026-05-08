@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteAI - Select Role</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="landing-body">
+    <div class="auth-split-container">
+        
+        <div class="auth-visual">
+            <h1>Waste<span style="font-weight: 300;">AI</span></h1>
+            <p>Smart Food Waste Prediction & Redistribution System. Empowering communities to save food and reduce waste.</p>
+        </div>
+
+        <div class="auth-form-side landing-mode">
+            <h2>Welcome to WasteAI</h2>
+            <p class="subtitle">Select your portal to get started</p>
+
+            <div class="role-selection">
+                <a href="login.html" class="role-card user-role" onclick="localStorage.setItem('role','Restaurant')">
+                    <div class="icon">🍱</div>
+                    <div>
+                        <h3>Restaurant Portal</h3>
+                        <p>Analyze food expiry and donate surplus items.</p>
+                    </div>
+                </a>
+                
+                <a href="login.html" class="role-card admin-role" onclick="localStorage.setItem('role','NGO')">
+                    <div class="icon">🤝</div>
+                    <div>
+                        <h3>NGO Dashboard</h3>
+                        <p>Claim available food donations and track logistics.</p>
+                    </div>
+                </a>
+
+                <a href="login.html" class="role-card admin-role" onclick="localStorage.setItem('role','Admin')">
+                    <div class="icon">🛡️</div>
+                    <div>
+                        <h3>System Admin</h3>
+                        <p>Manage the global donation zone and insights.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                New to WasteAI? <a href="register.html" class="auth-link">Create an account</a>.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
